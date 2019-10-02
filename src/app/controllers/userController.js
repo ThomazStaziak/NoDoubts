@@ -1,5 +1,6 @@
 const { User } = require('../models/');
 const bcrypt = require('bcrypt');
+const axios = require('axios');
 
 module.exports = {
 	async index(req, res) {
@@ -18,32 +19,37 @@ module.exports = {
 			firstname,
 			lastname,
 			nickname,
-			image,
 			email,
 			password_hash
 		} = req.body;
 
+		const { originalname } = req.file;
+
 		const user = await User.create({
-			firstname: firstname,
-			lastname: lastname,
-			nickname: nickname,
-			image: image,
-			email: email,
+			firstname,
+			lastname,
+			nickname,
+			image: originalname,
+			email,
 			password_hash: bcrypt.hashSync(password_hash, 10)
 		});
 
-		if (user) {
-			if (
-				user.email == email &&
-				bcrypt.compareSync(password_hash, user.password_hash)
-			) {
-				res.redirect('/');
-			}
-		}
+		const response = await axios
+			.post(`${process.env.HOST}:${process.env.PORT}/validate-user`, {
+				email: user.email,
+				password_hash
+			})
+			.catch(() => res.render('index.hbs', { title: 'Erro logar' }));
+
+		if (response.data)
+			return res.render('index.hbs', {
+				logado: true,
+				username: user.nickname,
+				user_image: user.image
+			});
 	},
 
 	async validate(req, res) {
-		const { session } = req;
 		const { email, password_hash } = req.body;
 
 		const user = await User.findOne({ where: { email } });
@@ -56,14 +62,22 @@ module.exports = {
 			user.email == email &&
 			bcrypt.compareSync(password_hash, user.password_hash)
 		) {
-			session.logado = {
+			req.session.logado = {
 				id: user.id,
-				name: user.firstname
+				username: user.nickname
 			};
-			res.redirect('/');
+			res.render('index.hbs', {
+				logado: true,
+				username: user.nickname,
+				user_image: user.image
+			});
 		} else {
 			res.status(400).json({ error: 'Usuário ou senha inválidos' });
 		}
+	},
+
+	async logout(req, res) {
+		// const
 	},
 
 	async update(req, res) {
