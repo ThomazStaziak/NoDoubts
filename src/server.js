@@ -16,7 +16,7 @@ const server = http.createServer(app);
 // setting the session
 app.use(
 	session({
-		secret: 'titela',
+		secret: process.env.SESSION_PASS,
 		resave: true,
 		saveUninitialized: true,
 		cookie: { secure: true }
@@ -53,5 +53,5 @@ app.use(routes);
 // server listener
 server.listen(process.env.PORT, () => {
 	// eslint-disable-next-line no-console
-	console.log(`Listening on port ${process.env.PORT}`);
+	console.log(`Listening on port ${process.env.HOST}:${process.env.PORT}`);
 });
