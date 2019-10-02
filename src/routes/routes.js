@@ -1,20 +1,29 @@
 const express = require('express');
 const UserController = require('../app/controllers/userController');
+const multer = require('multer');
+const uploadConfig = require('../config/upload');
 
-const routes = express.Router();
-
-routes.get('/dev-route/', UserController.index);
-routes.get('/dev-route/:id', UserController.searchById);
-routes.get('/dev-route/deletar/:id', UserController.delete);
+const routes = new express.Router();
+const upload = multer(uploadConfig);
 
 // Edituser
 routes.post('/edit-user/:id', UserController.update);
 
 // Register user
-routes.post('/register-user', UserController.create);
+routes.post('/register-user', upload.single('image'), UserController.create);
 
 // Login
 routes.post('/validate-user', UserController.validate);
+
+//logout
+routes.get('/logout', (req, res) => {
+	req.session.destroy(err => {
+		if (err) {
+			return console.log(err);
+		}
+		res.redirect('/');
+	});
+});
 
 // Home
 routes.get('/', async (req, res) => {
