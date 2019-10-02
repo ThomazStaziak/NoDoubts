@@ -21,7 +21,7 @@
 	<meta name="web_author" content="No Doubt | Felipe Veronesi, Marcelo Diament e Victor Torres">
 	<meta name="theme-color" content="#000000">
 	<!-- OpenGraph e Metas da página -->
-	<title>No Doubt</title>
+	<title>No Doubts</title>
 	<meta name="title" content="NoDoubt">
 	<meta property="og:site_name" content="NoDoubt | A node.js case">
 	<meta property="og:locale" content="pt-BR">
@@ -112,6 +112,16 @@
 						</div>
 					</form>
 				</nav>
+				{{#if logado}}
+				<nav class="navbar ml-auto d-inline-block">
+					<form class="form-inline">
+						<img class="rounded-circle" height="35" width="35"
+							src="../../public/img/uploads/{{{user_image}}}" alt="">
+						<span class="m-0 px-2">{{{username}}}</span>
+						<a class="btn btn-success border-0 my-2 my-sm-0 ml-2 text-white" href="/logout">Logout</a>
+					</form>
+				</nav>
+				{{else}}
 				<nav class="navbar ml-auto d-inline-block">
 					<form class="form-inline">
 						<button class="btn btn-success border-0 my-2 my-sm-0 ml-2 text-white" type="button"
@@ -120,6 +130,7 @@
 							data-toggle="modal" data-target="#login" aria-label="login">Login</button>
 					</form>
 				</nav>
+				{{/if}}
 			</div>
 		</nav>
 	</header>
@@ -174,7 +185,8 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="/register-user" method="post" class="form" id="novaPerguntaForm">
+					<form action="/register-user" method="post" class="form" id="novaPerguntaForm"
+						enctype="multipart/form-data">
 						<div class="form-row mb-3">
 							<div class="col">
 								<label for="usuarioNome">Nome</label>
