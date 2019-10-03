@@ -1,10 +1,16 @@
 const express = require('express');
 const UserController = require('../app/controllers/userController');
+const questionsController = require('../app/controllers/questionsController');
 const multer = require('multer');
 const uploadConfig = require('../config/upload');
 
 const routes = new express.Router();
 const upload = multer(uploadConfig);
+
+
+//Questions Crud Start
+
+// Users CRUD Start
 
 // Edituser
 routes.post('/edit-user/:id', UserController.update);
@@ -14,6 +20,8 @@ routes.post('/register-user', upload.single('image'), UserController.create);
 
 // Login
 routes.post('/validate-user', UserController.validate);
+
+routes.get('/perguntas/adicionar', questionsController.showCategories);
 
 //logout
 routes.get('/logout', (req, res) => {
@@ -45,17 +53,13 @@ routes.get('/questoes/adicionar', async (req, res) => {
 	await res.render('novaPergunta.hbs');
 });
 
-// New Sub-category
-routes.get('/sub-categorias/adicionar', async (req, res) => {
-	await res.render('novaSubCategoria.hbs');
-});
 
 // Questions
 routes.get('/perguntas', async (req, res) => {
 	await res.render('pergunta.hbs');
 });
 
-routes.get('/perguntas/adicionar', async (req, res) => {
+routes.post('/perguntas/adicionar', async (req, res) => {
 	await res.render('novaPergunta.hbs');
 });
 
