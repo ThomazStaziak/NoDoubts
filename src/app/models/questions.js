@@ -1,18 +1,26 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize) => {
 	const Questions = sequelize.define(
-		'questions',
+		'Questions',
 		{
-			title: DataTypes.STRING,
-			content: DataTypes.STRING,
-			users_id: DataTypes.INTEGER,
-			categories_id: DataTypes.INTEGER
-		},
-		{}
-	);
-	Questions.associate = function(models) {
-		// associations can be defined here
-		// Questions.belongsTo(models.User), Questions.belongsTo(models.Category);
-	};
+			title: {
+				type: Sequelize.STRING
+			},
+			content:{
+				type: Sequelize.STRING
+			},
+			users_id: {
+				type: Sequelize.INTEGER
+			},
+			categories_id: {
+				type: Sequelize.INTEGER
+			} 
+		},{
+			tablename: 'questions'
+		});
+	// Questions.associate = function(models) {
+	// 	// associations can be defined here
+	// 	// Questions.belongsTo(models.User), Questions.belongsTo(models.Category);
+	// };
 	return Questions;
 };
