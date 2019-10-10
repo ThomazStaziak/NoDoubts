@@ -1,5 +1,5 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize) => {
 	const Category = sequelize.define(
 		'Category',
 		{
@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
 			tableName: 'categories'
 		}
 	);
-	Category.associate = function(models) {
-		// associations can be defined here
-	};
+	// Category.associate = function(models) {
+	// 	// associations can be defined here
+	// };
 	return Category;
 };

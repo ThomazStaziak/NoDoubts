@@ -3,17 +3,21 @@ const bcrypt = require('bcrypt');
 const axios = require('axios');
 
 module.exports = {
+
+	// find all users
 	async index(req, res) {
 		const users = await User.findAll();
 		console.log(users);
 	},
 
+	// find users by primary key (id)
 	async searchById(req, res) {
 		const id = req.params.id;
 		const users = await User.findByPk(id);
 		console.log(users);
 	},
 
+	// Create user
 	async create(req, res) {
 		const {
 			firstname,
@@ -43,6 +47,8 @@ module.exports = {
 		}
 	},
 
+
+	// Validation 
 	async validate(req, res) {
 		const { email, password_hash } = req.body;
 
@@ -79,6 +85,8 @@ module.exports = {
 		return res.redirect('/');
 	},
 
+
+	// User update
 	async update(req, res) {
 		const id = req.params.id;
 		const {
@@ -112,6 +120,8 @@ module.exports = {
 			});
 	},
 
+
+	// User delete
 	async deleteUser(req, res) {
 		const id = req.params.id;
 		User.destroy({
