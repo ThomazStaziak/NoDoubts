@@ -18,8 +18,7 @@ app.use(
 	session({
 		secret: process.env.SESSION_PASS,
 		resave: true,
-		saveUninitialized: true,
-		cookie: { secure: true }
+		saveUninitialized: true
 	})
 );
 
@@ -46,6 +45,12 @@ app.set('view engine', 'hbs');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// creating the locals middleware
+app.use((req, res, next) => {
+	res.locals.session = req.session;
+	next();
+});
 
 // adding routes
 app.use(routes);

@@ -27,10 +27,10 @@
 							</div>
 						</aside>
 						<section class="col-12 col-md-9 pt-2">
-							<form action="" method="post" class="form" id="novaPerguntaForm">
+							<form action="/perguntas/adicionar" method="post" class="form" id="novaPerguntaForm">
 								<div class="form-group">
 									<label for="perguntaTitulo">Título da Pergunta</label>
-									<input type="text" class="form-control" id="perguntaTitulo"
+									<input type="text" name="title" class="form-control" id="perguntaTitulo"
 										aria-describedby="perguntaTituloHelp" placeholder="Insira o título aqui"
 										maxlength="80">
 									<small id="perguntaTituloHelp" class="form-text text-muted">Insira um título
@@ -40,41 +40,17 @@
 									<div class="col">
 										<label for="perguntaCategoria">Categoria</label>
 										<select class="form-control" id="perguntaCategoria" form="novaPerguntaForm"
-											required name="novaPerguntaCategoria">
+											required name="categories_id">
 											<option value="" disabled="disabled" selected>Categorias</option>
-											<option value="back_end" title="Back End">Back End</option>
-											<option value="front_end" title="Front End">Front End</option>
-											<option value="mercado" title="Mercado de Programação">Mercado de
-												Programação</option>
-											<option value="css" title="CSS">CSS</option>
-											<option value="html" title="HTML">HTML</option>
-											<option value="javascript" title="JavaScript">JavaScript</option>
-											<option value="php" title="PHP">PHP</option>
-											<option value="laravel" title="Laravel">Laravel</option>
-											<option value="node" title="Node.js">Node.js</option>
-											<option value="react" title="React.js">React.js</option>
-											<option value="wordpress" title="WordPress">WordPress</option>
-										</select>
-									</div>
-									<div class="col">
-										<label for="perguntaSubcategoria">Subcategoria</label>
-										<select class="form-control" id="perguntaSubcategoria" form="novaPerguntaForm"
-											required name="novaPerguntaSubcategoria">
-											<option value="" disabled="disabled" selected>Subcategorias</option>
-											<option value="css" title="CSS">CSS</option>
-											<option value="html" title="HTML">HTML</option>
-											<option value="javascript" title="JavaScript">JavaScript</option>
-											<option value="php" title="PHP">PHP</option>
-											<option value="laravel" title="Laravel">Laravel</option>
-											<option value="node" title="Node.js">Node.js</option>
-											<option value="react" title="React.js">React.js</option>
-											<option value="wordpress" title="WordPress">WordPress</option>
+											{{#each categorias}}
+											<option value="{{id}}">{{title}}</option>
+											{{/each}}
 										</select>
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="novaPergunta">Descrição</label>
-									<textarea class="form-control" id="novaPergunta" rows="3"
+									<textarea class="form-control" id="novaPergunta" name="content" rows="3"
 										aria-describedby="novaPerguntaDescricaoHelp" placeholder="Insira sua pergunta"
 										cols="5" rows="4" maxlength="250"></textarea>
 									<small id="novaPerguntaDescricaoHelp" class="form-text text-muted">Insira uma
@@ -88,6 +64,7 @@
 										</label>
 									</div>
 								</div>
+								<input type="hidden" name="users_id" value="{{session.user.id}}">
 								<button type="submit"
 									class="btn btn-success border-0 my-2 my-sm-0 ml-auto text-white float-right"
 									aria-label="comentar">Comentar</button>
@@ -159,8 +136,7 @@
 							</div>
 						</aside>
 						<section class="col">
-							<a href="/perguntas" target="_self" rel="next"
-								title="Saiba mais sobre Titela's Feelings">
+							<a href="/perguntas" target="_self" rel="next" title="Saiba mais sobre Titela's Feelings">
 								<h4 class="text-dark">Titela's Feelings</h4>
 							</a>
 							<p class="text-black-50 text-justify mt-3">Mussum Ipsum, cacilds vidis litro abertis. Tá
@@ -203,8 +179,7 @@
 							</div>
 						</aside>
 						<section class="col">
-							<a href="/perguntas" target="_self" rel="next"
-								title="Saiba mais sobre Titela's Feelings">
+							<a href="/perguntas" target="_self" rel="next" title="Saiba mais sobre Titela's Feelings">
 								<h4 class="text-dark">Titela's Feelings</h4>
 							</a>
 							<p class="text-black-50 text-justify mt-3">Mussum Ipsum, cacilds vidis litro abertis. Tá
@@ -247,8 +222,7 @@
 							</div>
 						</aside>
 						<section class="col">
-							<a href="/perguntas" target="_self" rel="next"
-								title="Saiba mais sobre Titela's Feelings">
+							<a href="/perguntas" target="_self" rel="next" title="Saiba mais sobre Titela's Feelings">
 								<h4 class="text-dark">Titela's Feelings</h4>
 							</a>
 							<p class="text-black-50 text-justify mt-3">Mussum Ipsum, cacilds vidis litro abertis. Tá
@@ -291,8 +265,7 @@
 							</div>
 						</aside>
 						<section class="col">
-							<a href="/perguntas" target="_self" rel="next"
-								title="Saiba mais sobre Titela's Feelings">
+							<a href="/perguntas" target="_self" rel="next" title="Saiba mais sobre Titela's Feelings">
 								<h4 class="text-dark">Titela's Feelings</h4>
 							</a>
 							<p class="text-black-50 text-justify mt-3">Mussum Ipsum, cacilds vidis litro abertis. Tá
@@ -335,8 +308,7 @@
 							</div>
 						</aside>
 						<section class="col">
-							<a href="/perguntas" target="_self" rel="next"
-								title="Saiba mais sobre Titela's Feelings">
+							<a href="/perguntas" target="_self" rel="next" title="Saiba mais sobre Titela's Feelings">
 								<h4 class="text-dark">Titela's Feelings</h4>
 							</a>
 							<p class="text-black-50 text-justify mt-3">Mussum Ipsum, cacilds vidis litro abertis. Tá
@@ -379,8 +351,7 @@
 							</div>
 						</aside>
 						<section class="col">
-							<a href="/perguntas" target="_self" rel="next"
-								title="Saiba mais sobre Titela's Feelings">
+							<a href="/perguntas" target="_self" rel="next" title="Saiba mais sobre Titela's Feelings">
 								<h4 class="text-dark">Titela's Feelings</h4>
 							</a>
 							<p class="text-black-50 text-justify mt-3">Mussum Ipsum, cacilds vidis litro abertis. Tá
@@ -414,13 +385,13 @@
 							<a class="page-link" href="/perguntas/adicionar" tabindex="-1" rel="next" target="_self"
 								title="Acessar primeira página"><i class="fas fa-chevron-left"></i></a>
 						</li>
-						<li class="page-item active" aria-current="page"><a class="page-link" href="/perguntas/adicionar"
-								rel="next" target="_self" title="Acessar página 1">1 <span
+						<li class="page-item active" aria-current="page"><a class="page-link"
+								href="/perguntas/adicionar" rel="next" target="_self" title="Acessar página 1">1 <span
 									class="sr-only">(current)</span></a></li>
 						<li class="page-item"><a class="page-link" href="/perguntas/adicionar" rel="next" target="_self"
 								title="Acessar página 2">2</a></li>
-						<li class="page-item "><a class="page-link" href="/perguntas/adicionar" rel="next" target="_self"
-								title="Acessar página 3">3</a></li>
+						<li class="page-item "><a class="page-link" href="/perguntas/adicionar" rel="next"
+								target="_self" title="Acessar página 3">3</a></li>
 						<!-- Observação: ao implementar a paginação dinâmica, o limit deverá ser limitado de acordo com o media query -->
 						<li class="page-item">
 							<a class="page-link" href="/perguntas/adicionar" rel="next" target="_self"

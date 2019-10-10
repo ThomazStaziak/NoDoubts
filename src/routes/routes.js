@@ -1,5 +1,6 @@
 const express = require('express');
 const UserController = require('../app/controllers/userController');
+const QuestionsController = require('../app/controllers/questionsController');
 const multer = require('multer');
 const uploadConfig = require('../config/upload');
 
@@ -16,14 +17,7 @@ routes.post('/register-user', upload.single('image'), UserController.create);
 routes.post('/validate-user', UserController.validate);
 
 //logout
-routes.get('/logout', (req, res) => {
-	req.session.destroy(err => {
-		if (err) {
-			return console.log(err);
-		}
-		res.redirect('/');
-	});
-});
+routes.get('/logout', UserController.logout);
 
 // Home
 routes.get('/', async (req, res) => {
@@ -55,9 +49,8 @@ routes.get('/perguntas', async (req, res) => {
 	await res.render('pergunta.hbs');
 });
 
-routes.get('/perguntas/adicionar', async (req, res) => {
-	await res.render('novaPergunta.hbs');
-});
+routes.get('/perguntas/adicionar', QuestionsController.index);
+routes.post('/perguntas/adicionar', QuestionsController.store);
 
 // Privacy Policies
 routes.get('/politicas', async (req, res) => {

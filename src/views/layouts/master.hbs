@@ -51,23 +51,9 @@
 	<link rel="stylesheet" href="../../public/css/bootstrap.min.css" />
 	<!-- Default CSS -->
 	<link rel="stylesheet" href="../../public/css/style.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 	<!-- Default Minified CSS -->
 	<!-- <link rel="stylesheet" href="assets/css/style.min.css" /> -->
-	<!-- Font Awesome -->
-	<script src="https://kit.fontawesome.com/fce8f2d243.js"></script>
-	<!-- Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-		</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-		</script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-		</script>
-	<script defer src="../../public/js/js/bootstrap.js"></script>
-	<script defer src="../../public/js/js/bootstrap.bundle.js"></script>
-	<script defer src="../../public/js/js/main.js"></script>
 </head>
 <!-- Head - final -->
 <!-- Body - início -->
@@ -112,12 +98,12 @@
 						</div>
 					</form>
 				</nav>
-				{{#if logado}}
+				{{#if session.user.logado}}
 				<nav class="navbar ml-auto d-inline-block">
 					<form class="form-inline">
 						<img class="rounded-circle" height="35" width="35"
-							src="../../public/img/uploads/{{{user_image}}}" alt="">
-						<span class="m-0 px-2">{{{username}}}</span>
+							src="../../public/img/uploads/{{{session.user.avatar}}}" alt="">
+						<span class="m-0 px-2">{{{session.user.nickname}}}</span>
 						<a class="btn btn-success border-0 my-2 my-sm-0 ml-2 text-white" href="/logout">Logout</a>
 					</form>
 				</nav>
@@ -304,6 +290,93 @@
 		</div>
 	</div>
 	<!-- Modal Login - início -->
+
+	<!-- Font Awesome -->
+	<script src="https://kit.fontawesome.com/fce8f2d243.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+		</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+		</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+	{{!-- Handling errors --}}
+	{{#if loginError}}
+	<script>
+		$('#login').modal('show');
+
+		toastr.options = {
+			"closeButton": false,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": true,
+			"positionClass": "toast-bottom-center",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+
+		toastr.error("Email ou senha incorretos", "Erro")
+	</script>
+	{{/if}}
+	{{#if session.actions.firstTime}}
+	<script>
+		toastr.options = {
+			"closeButton": false,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": true,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "10000000000",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+
+		toastr.success('Bem vindo ao NoDoubts!', `Login efetuado com sucesso`);
+	</script>
+	{{/if}}
+
+	{{#if session.actions.signup}}
+	<script>
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "15000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+
+		toastr.success('Clique no botão login para entrar!', 'Cadastro efetuado!');
+	</script>
+	{{/if}}
 
 </body>
 <!-- Body - final -->
