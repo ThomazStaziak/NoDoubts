@@ -1,10 +1,6 @@
 const express = require('express');
 const UserController = require('../app/controllers/userController');
-<<<<<<< HEAD
 const QuestionsController = require('../app/controllers/questionsController');
-=======
-const questionsController = require('../app/controllers/questionsController');
->>>>>>> cb52add8cdd338699ad84f3dea4aae02c52acebc
 const multer = require('multer');
 const uploadConfig = require('../config/upload');
 
