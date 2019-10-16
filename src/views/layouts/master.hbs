@@ -52,6 +52,7 @@
 	<!-- Default CSS -->
 	<link rel="stylesheet" href="../../public/css/style.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+	<link rel="stylesheet" href="../../public/css/summernote.css">
 	<!-- Default Minified CSS -->
 	<!-- <link rel="stylesheet" href="assets/css/style.min.css" /> -->
 </head>
@@ -303,6 +304,15 @@
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
 		</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="../../public/js/summernote.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$('#summernote').summernote({
+				height: 250
+			});
+		});
+	</script>
 
 	{{!-- Handling errors --}}
 	{{#if loginError}}

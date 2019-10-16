@@ -1,5 +1,6 @@
 const { Category } = require('../models');
 const { Question } = require('../models');
+const { User } = require('../models');
 
 module.exports = {
 	async index(req, res) {
@@ -26,5 +27,19 @@ module.exports = {
 		});
 
 		return res.redirect('/');
+	},
+
+	async showQuestions(req, res) {
+		const questions = await Question.findAll({
+			include: [
+				{ model: Category, as: 'categories' },
+				{ model: User, as: 'user' }
+			]
+		});
+
+		return res.render('index.hbs', {
+			title: 'Fórum',
+			questions
+		});
 	}
 };

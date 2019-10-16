@@ -3,7 +3,7 @@ module.exports = (sequelize, Sequelize) => {
 	const Category = sequelize.define(
 		'Category',
 		{
-			title: DataTypes.STRING
+			title: Sequelize.STRING
 		},
 		{
 			tableName: 'categories'

@@ -7,8 +7,9 @@ const uploadConfig = require('../config/upload');
 const routes = new express.Router();
 const upload = multer(uploadConfig);
 
-
 //Questions Crud Start
+routes.get('/perguntas/adicionar', QuestionsController.index);
+routes.post('/perguntas/adicionar', QuestionsController.store);
 
 // Users CRUD Start
 
@@ -21,15 +22,11 @@ routes.post('/register-user', upload.single('image'), UserController.create);
 // Login
 routes.post('/validate-user', UserController.validate);
 
-routes.get('/perguntas/adicionar', questionsController.showCategories);
-
 //logout
 routes.get('/logout', UserController.logout);
 
 // Home
-routes.get('/', async (req, res) => {
-	await res.render('index.hbs');
-});
+routes.get('/', QuestionsController.showQuestions);
 
 // Category
 routes.get('/categorias', async (req, res) => {
@@ -46,14 +43,10 @@ routes.get('/questoes/adicionar', async (req, res) => {
 	await res.render('novaPergunta.hbs');
 });
 
-
 // Questions
 routes.get('/perguntas', async (req, res) => {
 	await res.render('pergunta.hbs');
 });
-
-routes.get('/perguntas/adicionar', QuestionsController.index);
-routes.post('/perguntas/adicionar', QuestionsController.store);
 
 // Privacy Policies
 routes.get('/politicas', async (req, res) => {

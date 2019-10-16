@@ -3,10 +3,10 @@ module.exports = (sequelize, Sequelize) => {
 	const Questions = sequelize.define(
 		'Question',
 		{
-			title: DataTypes.STRING,
-			content: DataTypes.STRING,
-			users_id: DataTypes.INTEGER,
-			categories_id: DataTypes.INTEGER
+			title: Sequelize.STRING,
+			content: Sequelize.STRING,
+			users_id: Sequelize.INTEGER,
+			categories_id: Sequelize.INTEGER
 		},
 		{
 			tableName: 'questions'
@@ -14,7 +14,14 @@ module.exports = (sequelize, Sequelize) => {
 	);
 	Questions.associate = function(models) {
 		// associations can be defined here
-		// Questions.belongsTo(models.User), Questions.belongsTo(models.Category);
+		Questions.belongsTo(models.User, {
+			foreignKey: 'users_id',
+			as: 'user'
+		}),
+			Questions.belongsTo(models.Category, {
+				foreignKey: 'categories_id',
+				as: 'categories'
+			});
 	};
 	return Questions;
 };
