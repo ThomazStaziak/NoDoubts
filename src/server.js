@@ -3,7 +3,7 @@ const hbs = require('express-handlebars');
 const path = require('path');
 const session = require('express-session');
 // importing dotenv with environment variables
-require('dotenv').config();
+require('dotenv/config');
 
 // instantiating express
 const app = express();
@@ -23,7 +23,8 @@ app.use(
 );
 
 // importing routes
-const routes = require('./routes/routes');
+const users = require('./routes/users');
+const questions = require('./routes/questions');
 
 // hability assets
 app.use('/public', express.static(path.join(__dirname, '/public')));
@@ -53,10 +54,11 @@ app.use((req, res, next) => {
 });
 
 // adding routes
-app.use(routes);
+app.use(users);
+app.use(questions);
 
 // server listener
-server.listen(process.env.PORT, () => {
+server.listen(process.env.PORT || 3333, () => {
 	// eslint-disable-next-line no-console
 	console.log(`Listening on port ${process.env.HOST}:${process.env.PORT}`);
 });

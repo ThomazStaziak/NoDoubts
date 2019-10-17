@@ -1,44 +1,3 @@
-<!-- Paginação - início -->
-<div class="container">
-	<article class="row">
-		<nav aria-label="Categorias" class="paginate col-12 col-md-8">
-			<ul class="pagination justify-content-between">
-				<li class="page-item disabled">
-					<a class="page-link" href="index.html" tabindex="-1" rel="next" target="_self"
-						title="Acessar primeira página"><i class="fas fa-chevron-left"></i></a>
-				</li>
-				<li class="page-item active" aria-current="page"><a class="page-link" href="index.html" rel="next"
-						target="_self" title="Acessar página 1">1 <span class="sr-only">(current)</span></a></li>
-				<li class="page-item"><a class="page-link" href="index.html" rel="next" target="_self"
-						title="Acessar página 2">2</a></li>
-				<li class="page-item "><a class="page-link" href="index.html" rel="next" target="_self"
-						title="Acessar página 3">3</a></li>
-				<!-- Observação: ao implementar a paginação dinâmica, o limit deverá ser limitado de acordo com o media query -->
-				<li class="page-item d-none d-md-inline"><a class="page-link" href="index.html" rel="next"
-						target="_self" title="Acessar página 4">4</a></li>
-				<li class="page-item d-none d-md-inline"><a class="page-link" href="index.html" rel="next"
-						target="_self" title="Acessar página 5">5</a></li>
-				<li class="page-item d-none d-lg-inline"><a class="page-link" href="index.html" rel="next"
-						target="_self" title="Acessar página 6">6</a></li>
-				<li class="page-item d-none d-lg-inline"><a class="page-link" href="index.html" rel="next"
-						target="_self" title="Acessar página 7">7</a></li>
-				<li class="page-item"><a class="page-link disabled" href="index.html"
-						title="Navegue para ver mais páginas">...</a></li>
-				<li class="page-item d-none d-lg-inline"><a class="page-link" href="index.html" rel="next"
-						target="_self" title="Acessar página 144">144</a></li>
-				<li class="page-item d-none d-md-inline"><a class="page-link" href="index.html" rel="next"
-						target="_self" title="Acessar página 233">233</a></li>
-				<li class="page-item d-none d-sm-inline"><a class="page-link" href="index.html" rel="next"
-						target="_self" title="Acessar página 377">377</a></li>
-				<li class="page-item">
-					<a class="page-link" href="index.html" rel="next" target="_self" title="Acessar última página"><i
-							class="fas fa-chevron-right"></i></a>
-				</li>
-			</ul>
-		</nav>
-	</article>
-</div>
-<!-- Paginação - final -->
 <!-- Content - início -->
 <div class="container">
 	<div class="row">
@@ -46,7 +5,7 @@
 		<main class="col-12 col-md-8">
 			<!-- Posts - início -->
 			{{#if questions}}
-			<section class="row my-4">
+			<section class="row">
 				{{#each questions}}
 				<!-- Post User Offline - início -->
 				<div
@@ -95,7 +54,7 @@
 				{{/each}}
 			</section>
 			{{else}}
-			<div class="col-md-12 my-5">
+			<div class="col-md-12 my-4">
 				<div class="alert alert-danger" role="alert">
 					Não tem nenhuma pergunta ainda :(
 				</div>
@@ -107,7 +66,7 @@
 
 
 		<!-- Aside - início -->
-		<aside class="col-12 col-md-4 pl-4 my-4">
+		<aside class="col-12 col-md-4 pl-4">
 			<!-- Aside Nav > Principais Perguntas - início -->
 			<article class="col-12 d-flex flex-row shadow-sm bg-white rounded-sm p-3 my-4 sticky-top"
 				id="asideTopoTopPerguntas">
@@ -193,7 +152,7 @@
 						{{#each categories}}
 						<li
 							class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-1">
-							<a href="categoria.html" class="text-black-50" target="_self" rel="next"
+							<a href="/categoria/{{{id}}}" class="text-black-50" target="_self" rel="next"
 								title="{{{title}}}">
 								{{{title}}}
 							</a>
