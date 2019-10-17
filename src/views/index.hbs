@@ -45,6 +45,7 @@
 		<!-- Main - início -->
 		<main class="col-12 col-md-8">
 			<!-- Posts - início -->
+			{{#if questions}}
 			<section class="row my-4">
 				{{#each questions}}
 				<!-- Post User Offline - início -->
@@ -93,6 +94,13 @@
 				<!-- Post User Offline - final -->
 				{{/each}}
 			</section>
+			{{else}}
+			<div class="col-md-12 my-5">
+				<div class="alert alert-danger" role="alert">
+  					Não tem nenhuma pergunta ainda :(
+				</div>
+			</div>
+			{{/if}}
 			<!-- Posts - final -->
 		</main>
 		<!-- Main - final -->
