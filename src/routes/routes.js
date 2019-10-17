@@ -1,5 +1,6 @@
 const express = require('express');
 const UserController = require('../app/controllers/userController');
+const auth = require('../app/middleware/auth');
 const QuestionsController = require('../app/controllers/questionsController');
 const multer = require('multer');
 const uploadConfig = require('../config/upload');
@@ -8,8 +9,8 @@ const routes = new express.Router();
 const upload = multer(uploadConfig);
 
 //Questions Crud Start
-routes.get('/perguntas/adicionar', QuestionsController.index);
-routes.post('/perguntas/adicionar', QuestionsController.store);
+routes.get('/perguntas/adicionar', auth, QuestionsController.index);
+routes.post('/perguntas/adicionar', auth, QuestionsController.store);
 
 // Users CRUD Start
 

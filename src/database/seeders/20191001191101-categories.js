@@ -11,11 +11,6 @@ module.exports = {
 					updatedAt: new Date()
 				},
 				{
-					title: 'Bootstrap',
-					createdAt: new Date(),
-					updatedAt: new Date()
-				},
-				{
 					title: 'CSS',
 					createdAt: new Date(),
 					updatedAt: new Date()
@@ -36,11 +31,6 @@ module.exports = {
 					updatedAt: new Date()
 				},
 				{
-					title: 'Laravel',
-					createdAt: new Date(),
-					updatedAt: new Date()
-				},
-				{
 					title: 'Nivelamento',
 					createdAt: new Date(),
 					updatedAt: new Date()
@@ -52,11 +42,6 @@ module.exports = {
 				},
 				{
 					title: 'React',
-					createdAt: new Date(),
-					updatedAt: new Date()
-				},
-				{
-					title: 'Deploy',
 					createdAt: new Date(),
 					updatedAt: new Date()
 				}
