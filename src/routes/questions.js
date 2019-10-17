@@ -13,6 +13,8 @@ questions.get('/', showQuestions);
 questions.get('/perguntas/adicionar', auth, index);
 questions.post('/perguntas/adicionar', auth, store);
 
+questions.get('/perguntas/:id', QuestionsController.searchById);
+
 // Categories filter
 questions.get('/categoria/:id', showByCategory);
 
