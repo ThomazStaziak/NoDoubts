@@ -1,13 +1,15 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize) => {
 	const Answers = sequelize.define(
 		'answers',
 		{
-			content: DataTypes.STRING,
-			questions_id: DataTypes.INTEGER,
-			users_id: DataTypes.INTEGER
+			content: Sequelize.STRING,
+			questions_id: Sequelize.INTEGER,
+			users_id: Sequelize.INTEGER
 		},
-		{}
+		{
+			tableName: 'answers'
+		}
 	);
 	Answers.associate = function(models) {
 		// associations can be defined here

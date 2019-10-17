@@ -29,6 +29,22 @@ module.exports = {
 		return res.redirect('/');
 	},
 
+	async searchById(req, res) {
+		const id = req.params.id;
+		const questions = await Question.findAll({
+			where: {id},
+				include: [
+					{ model: Category, as: 'categories' },
+					{ model: User, as: 'user' }
+				],
+			}
+		)
+		return res.render('pergunta' , {
+			questions
+		});
+	},
+
+
 	async showQuestions(req, res) {
 		const questions = await Question.findAll({
 			include: [

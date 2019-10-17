@@ -1,6 +1,7 @@
 const express = require('express');
 const UserController = require('../app/controllers/userController');
 const QuestionsController = require('../app/controllers/questionsController');
+const AnswersController = require('../app/controllers/answersController');
 const multer = require('multer');
 const uploadConfig = require('../config/upload');
 
@@ -11,6 +12,8 @@ const upload = multer(uploadConfig);
 routes.get('/perguntas/adicionar', QuestionsController.index);
 routes.post('/perguntas/adicionar', QuestionsController.store);
 
+//Answers Crud Start
+routes.get('/perguntas/:id', QuestionsController.searchById);
 // Users CRUD Start
 
 // Edituser
