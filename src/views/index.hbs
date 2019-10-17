@@ -52,7 +52,7 @@
 					class="post shadow-sm bg-white rounded-sm col-12 p-3 pt-5 my-4 mx-3 mx-md-1 d-flex flex-row flex-wrap">
 					<article class="col-12 col-md-10 d-flex flex-wrap px-0">
 						<aside class="col-3">
-							<div class="my-2 position-relative user-offline text-center">
+							<div class="d-flex flex-column justify-content-center align-items-center">
 								<img src="../public/img/uploads/{{user.image}}" alt="" height="50" width="50"
 									class="d-block mx-auto rounded-circle">
 								<small>{{user.nickname}}</small>
@@ -70,10 +70,10 @@
 						<section class="col">
 							<a href="pergunta.html" target="_self" rel="next"
 								title="Saiba mais sobre Titela's Feelings">
-								<h4 class="text-dark">{{title}}</h4>
+								<h4 class="text-dark">{{{title}}}</h4>
 							</a>
-							<small>{{categories.title}}</small>
-							<p id="contentP" class="text-black-50 text-justify mt-3">{{content}}</p>
+							<small>{{{categories.title}}}</small>
+							<p id="contentP" class="text-black-50 text-justify mt-3">{{{content}}}</p>
 						</section>
 					</article>
 					<aside class="col-12 col-md-2 px-0 py-4">

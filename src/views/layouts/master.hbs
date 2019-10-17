@@ -307,10 +307,16 @@
 	<script src="../../public/js/summernote.js"></script>
 
 	<script>
-		$(document).ready(function () {
-			$('#summernote').summernote({
-				height: 250
-			});
+		$("#summernote").summernote({
+			placeholder: "Insira a descrição aqui",
+			tabsize: 2,
+			height: 200,
+			popover: {
+				air: [
+					['color', ['color']],
+					['font', ['bold', 'underline', 'clear']]
+				]
+			}
 		});
 	</script>
 

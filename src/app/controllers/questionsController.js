@@ -34,7 +34,8 @@ module.exports = {
 			include: [
 				{ model: Category, as: 'categories' },
 				{ model: User, as: 'user' }
-			]
+			],
+			order: [['id', 'DESC']]
 		});
 
 		return res.render('index.hbs', {
