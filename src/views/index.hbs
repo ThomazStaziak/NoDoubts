@@ -78,7 +78,7 @@
 					<ul class="list-group text-black-50">
 						{{#each recentQuestions}}
 						<li class="list-group-item border-left-0 border-right-0 border-top-0 px-0"><a
-								href="pergunta.html" class="text-black-50" rel="next" target="_self"
+								href="/perguntas/{{{id}}}" class="text-black-50" rel="next" target="_self"
 								title="{{{title}}}">{{{title}}}</a></li>
 						{{/each}}
 					</ul>
@@ -175,7 +175,8 @@
 					<ul class="list-group text-black-50">
 						{{#each userQuestions}}
 						<li class="list-group-item border-left-0 border-right-0 border-top-0 px-0">
-							<a href="pergunta.html" class="text-black-50" rel="next" target="_self" title="{{{title}}}">
+							<a href="/perguntas/{{{id}}}" class="text-black-50" rel="next" target="_self"
+								title="{{{title}}}">
 								{{{title}}}
 							</a>
 						</li>

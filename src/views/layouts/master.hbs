@@ -75,24 +75,24 @@
 				aria-controls="menuSuperior" aria-expanded="false" aria-label="Alterna navegação" title="Exibir Menu">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse text-center" id="menuSuperior">
-				<ul class="navbar-nav mr-auto">
+			<div class="collapse navbar-collapse text-center d-flex justify-content-between" id="menuSuperior">
+				{{#if session.user.logado}}
+				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link text-black-50" href="/" title="Categorias" target="_self"
-							rel="next">Categorias</a>
+						<a class="btn btn-success" href="/perguntas/adicionar" title="Adicionar Categoria"
+							target="_self" rel="next">
+							Adicionar pergunta
+							<i class="fas fa-plus"></i>
+						</a>
 					</li>
-					<!--
-            <li class="nav-item">
-              <a class="nav-link text-black-50" href="#" title="Perguntas" target="_self" rel="next">Perguntas</a>
-            </li>
-          -->
 				</ul>
-				<nav class="navbar mx-auto d-inline-block">
-					<form class="form-inline" action="resultados.html" method="get">
-						<div class="form-group d-flex flex-row flex-nowrap align-items-center">
-							<input class="form-control" type="search" placeholder="Pesquisar" aria-label="Pesquisar"
-								name="pesquisaInput" id="pesquisaInput" />
-							<button class="btn btn-success border-0 my-2 my-sm-0 ml-2 text-white" type="submit"
+				{{/if}}
+				<nav class="navbar d-inline-block col-5">
+					<form class="form-inline w-100" action="/buscar" method="POST">
+						<div class="form-group d-flex flex-row flex-nowrap align-items-center w-100">
+							<input class="form-control w-75" type="search" placeholder="Pesquisar"
+								aria-label="Pesquisar" name="search" id="pesquisaInput" />
+							<button class="btn btn-success border-0 my-2 my-sm-0 ml-2 text-white w-25" type="submit"
 								aria-label="pesquisar" id="pesquisar">
 								<i class="fas fa-search"></i>
 							</button>
@@ -100,14 +100,20 @@
 					</form>
 				</nav>
 				{{#if session.user.logado}}
-				<nav class="navbar ml-auto d-inline-block">
-					<form class="form-inline">
+				<div class="dropdown">
+					<span class="dropdown-toggle mr-4 pr-4" id="dropdownMenuButton" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
 						<img class="rounded-circle" height="35" width="35"
 							src="../../public/img/uploads/{{{session.user.avatar}}}" alt="">
 						<span class="m-0 px-2">{{{session.user.nickname}}}</span>
-						<a class="btn btn-success border-0 my-2 my-sm-0 ml-2 text-white" href="/logout">Logout</a>
-					</form>
-				</nav>
+					</span>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item px-3" href="/meu/perfil"><i class="fas fa-user"></i> Meu perfil</a>
+						<a class="dropdown-item px-3" href="/minhas/perguntas"><i class="fas fa-question"></i> Minhas
+							perguntas</a>
+						<a class="dropdown-item px-3" href="/logout"><i class="fas fa-sign-out-alt"></i> Sair</a>
+					</div>
+				</div>
 				{{else}}
 				<nav class="navbar ml-auto d-inline-block">
 					<form class="form-inline">
