@@ -84,62 +84,6 @@
 				</section>
 			</article>
 			<!-- Aside Nav > Principais Perguntas - final -->
-			<!-- Aside Nav > Enquete da Semana - início -->
-			<article class="col-12 d-flex flex-row shadow-sm bg-white rounded-sm p-3 my-4 sticky-top" id="asideTopoEnq">
-				<section class="col-12">
-					<a href="#" target="_self" rel="next" title="Acesse todas as enquetes">
-						<h4 class="text-dark">Enquete da Semana</h4>
-					</a>
-					<hr class="col-auto">
-					<p>Qual tema está estudando essa semana?</p>
-					<!-- Progress Bar #01 -->
-					<div class="row d-flex flex-row flex-nowrap mb-3">
-						<div class="progress col-9 pl-0 mr-auto ml-3" style="height: 30px;">
-							<div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-								role="progressbar" style="width: 48%;" aria-valuenow="48" aria-valuemin="0"
-								aria-valuemax="100">POO</div>
-						</div>
-						<button class="btn btn-secondary col-2 py-0" aria-label="selecionar">&#10003;</button>
-					</div>
-					<!-- Progress Bar #02 -->
-					<div class="row d-flex flex-row flex-nowrap mb-3">
-						<div class="progress col-9 pl-0 mr-auto ml-3" style="height: 30px;">
-							<div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
-								role="progressbar" style="width: 21%;" aria-valuenow="21" aria-valuemin="0"
-								aria-valuemax="100">POO</div>
-						</div>
-						<button class="btn btn-success col-2 py-0" aria-label="selecionar">&#10003;</button>
-					</div>
-					<!-- Progress Bar #03 -->
-					<div class="row d-flex flex-row flex-nowrap mb-3">
-						<div class="progress col-9 pl-0 mr-auto ml-3" style="height: 30px;">
-							<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-								style="width: 16%;" aria-valuenow="16" aria-valuemin="0" aria-valuemax="100">PDO</div>
-						</div>
-						<button class="btn btn-secondary col-2 py-0" aria-label="selecionar">&#10003;</button>
-					</div>
-					<!-- Progress Bar #04 -->
-					<div class="row d-flex flex-row flex-nowrap mb-3">
-						<div class="progress col-9 pl-0 mr-auto ml-3" style="height: 30px;">
-							<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-								role="progressbar" style="width: 8%;" aria-valuenow="8" aria-valuemin="0"
-								aria-valuemax="100">POO</div>
-						</div>
-						<button class="btn btn-secondary col-2 py-0" aria-label="selecionar">&#10003;</button>
-					</div>
-					<!-- Progress Bar #05 -->
-					<div class="row d-flex flex-row flex-nowrap mb-3">
-						<div class="progress col-9 pl-0 mr-auto ml-3" style="height: 30px;">
-							<div class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-								role="progressbar" style="width: 7%;" aria-valuenow="7" aria-valuemin="0"
-								aria-valuemax="100">POO</div>
-						</div>
-						<button class="btn btn-secondary col-2 py-0" aria-label="selecionar">&#10003;</button>
-					</div>
-					<small class="text-muted">Votações até dia 01/10/2019</small>
-				</section>
-			</article>
-			<!-- Aside Nav > Enquete da Semana - final -->
 			<!-- Aside Nav > Categorias - início -->
 			<article class="col-12 d-flex flex-row shadow-sm bg-white rounded-sm p-3 my-4 sticky-top" id="asideTopoCat">
 				<section class="col-12">
@@ -162,6 +106,32 @@
 				</section>
 			</article>
 			<!-- Aside Nav > Categorias - final -->
+			<!-- Aside Nav > Enquete da Semana - início -->
+			<article class="col-12 d-flex flex-row shadow-sm bg-white rounded-sm p-3 my-4 sticky-top" id="asideTopoEnq">
+				<section class="col-12">
+					<a href="#" target="_self" rel="next" title="Acesse todas as enquetes">
+						<h4 class="text-dark">Assuntos em destaque</h4>
+					</a>
+					<hr class="col-auto">
+					<p>Esses são os assuntos mais estudados</p>
+					{{#each trendQuestions}}
+					<!-- Progress Bar #01 -->
+					<div class="row d-flex flex-row flex-nowrap mb-3">
+						<div class="progress col-10 pl-0 mr-auto ml-3" style="height: 30px;">
+							<div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+								role="progressbar" style="width: {{progress}}%;" aria-valuenow="{{progress}}"
+								aria-valuemin="0" aria-valuemax="100">
+								<span class="text-dark">
+									{{title}}
+								</span>
+							</div>
+						</div>
+					</div>
+					{{/each}}
+					<small class="text-muted">Temas mostrados de acordo com o número de perguntas</small>
+				</section>
+			</article>
+			<!-- Aside Nav > Enquete da Semana - final -->
 		</aside>
 		<!-- Aside - final -->
 
