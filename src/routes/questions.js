@@ -30,6 +30,6 @@ questions.get('/categoria/:id', showByCategory);
 questions.post('/buscar', searchByName);
 
 // Show user questions
-questions.get('/minhas/perguntas', userQuestions);
+questions.get('/minhas/perguntas', auth, userQuestions);
 
 module.exports = questions;

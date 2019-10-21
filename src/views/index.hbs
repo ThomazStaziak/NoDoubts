@@ -32,7 +32,9 @@
 								title="Saiba mais sobre Titela's Feelings">
 								<h4 class="text-dark">{{{title}}}</h4>
 							</a>
-							<small>{{{categories.title}}}</small>
+							<a href="/categoria/{{{categories.id}}}">
+								<small>{{{categories.title}}}</small>
+							</a>
 							<p id="contentP" class="text-black-50 text-justify mt-3">{{{content}}}</p>
 						</section>
 					</article>
@@ -42,11 +44,8 @@
 									class="badge-secondary text-center px-3 py-2">165</span><span
 									class="text-black-50 d-block">&#9660;</span></li>
 							<li class="list-group-item bg-white text-black-50 text-center border-0 mb-3"><i
-									class="fas fa-eye"></i> 16
-							</li>
-							<li class="list-group-item bg-white text-black-50 text-center border-0 mb-3"><i
 									class="fas fa-clock"></i>
-								63 min</li>
+								Publicado há {{{time}}}</li>
 						</ul>
 					</aside>
 				</div>
@@ -163,31 +162,6 @@
 				</section>
 			</article>
 			<!-- Aside Nav > Categorias - final -->
-			<!-- Aside Nav > Minhas Perguntas - início -->
-			{{#if userQuestions}}
-			<article class="col-12 d-flex flex-row shadow-sm bg-white rounded-sm p-3 my-4 sticky-top"
-				id="asideTopoMinhasPerguntas">
-				<section class="col-12">
-					<a href="#" target="_self" rel="next" title="Acesse todas as perguntas">
-						<h4 class="text-dark">Minhas Perguntas</h4>
-					</a>
-					<hr class="col-auto">
-					<ul class="list-group text-black-50">
-						{{#each userQuestions}}
-						<li class="list-group-item border-left-0 border-right-0 border-top-0 px-0">
-							<a href="/perguntas/{{{id}}}" class="text-black-50" rel="next" target="_self"
-								title="{{{title}}}">
-								{{{title}}}
-							</a>
-						</li>
-						{{/each}}
-					</ul>
-				</section>
-			</article>
-			{{/if}}
-			<!-- Aside Nav > Minhas Perguntas - final -->
-			<!-- Aside Nav > Ir para o Topo - início -->
-			<!-- Aside Nav > Ir para o Topo - final -->
 		</aside>
 		<!-- Aside - final -->
 

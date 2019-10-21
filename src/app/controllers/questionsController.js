@@ -1,8 +1,11 @@
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+const { formatDistanceToNow } = require('date-fns');
+const { ptBR } = require('date-fns/locale');
+
 const { Category } = require('../models');
 const { Question } = require('../models');
 const { User } = require('../models');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 
 module.exports = {
 	async index(req, res) {
@@ -52,6 +55,13 @@ module.exports = {
 			order: [['id', 'DESC']]
 		});
 
+		questions.forEach(element => {
+			element.time = formatDistanceToNow(element.createdAt, {
+				locale: ptBR,
+				includeSeconds: true
+			});
+		});
+
 		const categories = await Category.findAll({
 			attributes: ['id', 'title'],
 			raw: true
@@ -68,15 +78,6 @@ module.exports = {
 			categories,
 			recentQuestions
 		};
-
-		if (req.session.user) {
-			const userQuestions = await Question.findAll({
-				where: { users_id: req.session.user.id },
-				limit: 5
-			});
-
-			data.userQuestions = userQuestions;
-		}
 
 		return res.render('index.hbs', data);
 	},
@@ -91,6 +92,13 @@ module.exports = {
 			order: [['id', 'DESC']]
 		});
 
+		questions.forEach(element => {
+			element.time = formatDistanceToNow(element.createdAt, {
+				locale: ptBR,
+				includeSeconds: true
+			});
+		});
+
 		const categories = await Category.findAll({
 			attributes: ['id', 'title'],
 			raw: true
@@ -107,15 +115,6 @@ module.exports = {
 			categories,
 			recentQuestions
 		};
-
-		if (req.session.user) {
-			const userQuestions = await Question.findAll({
-				where: { users_id: req.session.user.id },
-				limit: 5
-			});
-
-			data.userQuestions = userQuestions;
-		}
 
 		return res.render('index.hbs', data);
 	},
@@ -130,6 +129,13 @@ module.exports = {
 			order: [['id', 'DESC']]
 		});
 
+		questions.forEach(element => {
+			element.time = formatDistanceToNow(element.createdAt, {
+				locale: ptBR,
+				includeSeconds: true
+			});
+		});
+
 		const categories = await Category.findAll({
 			attributes: ['id', 'title'],
 			raw: true
@@ -146,15 +152,6 @@ module.exports = {
 			categories,
 			recentQuestions
 		};
-
-		if (req.session.user) {
-			const userQuestions = await Question.findAll({
-				where: { users_id: req.session.user.id },
-				limit: 5
-			});
-
-			data.userQuestions = userQuestions;
-		}
 
 		return res.render('index.hbs', data);
 	},
@@ -169,6 +166,13 @@ module.exports = {
 			order: [['id', 'DESC']]
 		});
 
+		questions.forEach(element => {
+			element.time = formatDistanceToNow(element.createdAt, {
+				locale: ptBR,
+				includeSeconds: true
+			});
+		});
+
 		const categories = await Category.findAll({
 			attributes: ['id', 'title'],
 			raw: true
@@ -185,15 +189,6 @@ module.exports = {
 			categories,
 			recentQuestions
 		};
-
-		if (req.session.user) {
-			const userQuestions = await Question.findAll({
-				where: { users_id: req.session.user.id },
-				limit: 5
-			});
-
-			data.userQuestions = userQuestions;
-		}
 
 		return res.render('index.hbs', data);
 	}
