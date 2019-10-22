@@ -13,6 +13,8 @@ users.post('/register-user', upload.single('image'), UserController.create);
 // Login
 users.post('/validate-user', UserController.validate);
 
+users.get('/meu/perfil', auth, UserController.myProfile);
+
 //logout
 users.get('/logout', auth, UserController.logout);
 

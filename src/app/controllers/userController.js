@@ -1,9 +1,22 @@
+require('dotenv/config');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+const sequelize = new Sequelize(
+	process.env.DB_NAME,
+	process.env.DB_USER,
+	process.env.DB_PASS,
+	{ dialect: process.env.DB_PROVIDER }
+);
+const { formatDistanceToNow } = require('date-fns');
+const { ptBR } = require('date-fns/locale');
+
+const { Category } = require('../models');
+const { Question } = require('../models');
 const { User } = require('../models/');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 
 module.exports = {
-
 	// find all users
 	async index(req, res) {
 		const users = await User.findAll();
@@ -47,8 +60,7 @@ module.exports = {
 		}
 	},
 
-
-	// Validation 
+	// Validation
 	async validate(req, res) {
 		const { email, password_hash } = req.body;
 
@@ -67,7 +79,10 @@ module.exports = {
 				firstTime: true,
 				id: user.id,
 				nickname: user.nickname,
-				avatar: user.image
+				avatar: user.image,
+				firstname: user.firstname,
+				lastname: user.lastname,
+				email: user.email
 			};
 			req.session.actions = {
 				signup: false
@@ -84,7 +99,6 @@ module.exports = {
 		req.session.destroy();
 		return res.redirect('/');
 	},
-
 
 	// User update
 	async update(req, res) {
@@ -120,7 +134,6 @@ module.exports = {
 			});
 	},
 
-
 	// User delete
 	async deleteUser(req, res) {
 		const id = req.params.id;
@@ -133,5 +146,59 @@ module.exports = {
 			.catch(error => {
 				res.send('Erro ao excluir usuario' + error + id);
 			});
+	},
+
+	async myProfile(req, res) {
+		const questions = await Question.findAll({
+			include: [
+				{ model: Category, as: 'categories' },
+				{ model: User, as: 'user' }
+			],
+			order: [['id', 'DESC']]
+		});
+
+		questions.forEach(element => {
+			element.time = formatDistanceToNow(element.createdAt, {
+				locale: ptBR,
+				includeSeconds: true
+			});
+		});
+
+		let trendQuestions = await sequelize.query(
+			'select categories.title as title, count(questions.categories_id) as count from questions inner join categories on questions.categories_id = categories.id group by categories_id;',
+			{ type: Sequelize.QueryTypes.SELECT }
+		);
+
+		trendQuestions.forEach(element => {
+			element.progress = (element.count / questions.length) * 100;
+		});
+
+		trendQuestions = trendQuestions.sort((a, b) => {
+			if (a.progress > b.progress) {
+				return -1;
+			}
+			if (b.progress > a.progress) {
+				return 1;
+			}
+			return 0;
+		});
+
+		const categories = await Category.findAll({
+			attributes: ['id', 'title'],
+			raw: true
+		});
+
+		const recentQuestions = await Question.findAll({
+			order: [['id', 'DESC']],
+			limit: 5
+		});
+
+		return res.render('perfil.hbs', {
+			title: 'Fórum',
+			questions,
+			categories,
+			recentQuestions,
+			trendQuestions
+		});
 	}
 };
