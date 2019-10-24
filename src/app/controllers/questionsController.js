@@ -13,6 +13,7 @@ const { ptBR } = require('date-fns/locale');
 const { Category } = require('../models');
 const { Question } = require('../models');
 const { User } = require('../models');
+const { Answer } = require('../models');
 
 module.exports = {
 	async index(req, res) {
@@ -82,12 +83,17 @@ module.exports = {
 
 	async searchById(req, res) {
 		const id = req.params.id;
-		const questions = await Question.findAll({
+		const question = await Question.findOne({
 			where: { id },
 			include: [
 				{ model: Category, as: 'categories' },
 				{ model: User, as: 'user' }
 			]
+		});
+
+		question.time = formatDistanceToNow(question.createdAt, {
+			locale: ptBR,
+			includeSeconds: true
 		});
 
 		const categories = await Category.findAll({
@@ -96,13 +102,6 @@ module.exports = {
 		});
 
 		const allQuestions = await Question.findAll();
-
-		questions.forEach(element => {
-			element.time = formatDistanceToNow(element.createdAt, {
-				locale: ptBR,
-				includeSeconds: true
-			});
-		});
 
 		let trendQuestions = await sequelize.query(
 			'select categories.title as title, count(questions.categories_id) as count from questions inner join categories on questions.categories_id = categories.id group by categories_id;',
@@ -128,8 +127,22 @@ module.exports = {
 			limit: 5
 		});
 
+		const answers = await Answer.findAll({
+			where: { questions_id: id },
+			include: [{ model: User, as: 'user' }],
+			order: [['id', 'DESC']]
+		});
+
+		answers.forEach(element => {
+			element.time = formatDistanceToNow(element.createdAt, {
+				locale: ptBR,
+				includeSeconds: true
+			});
+		});
+
 		return res.render('pergunta', {
-			questions,
+			question,
+			answers,
 			categories,
 			recentQuestions,
 			trendQuestions
@@ -361,5 +374,21 @@ module.exports = {
 		};
 
 		return res.render('index.hbs', data);
+	},
+
+	async addAnswer(req, res) {
+		const { content, users_id, questions_id } = req.body;
+
+		// const question = await Question.findOne({
+		// 	where: {id: questions_id}
+		// });
+
+		await Answer.create({
+			questions_id,
+			content,
+			users_id
+		});
+
+		return res.redirect(`/perguntas/${questions_id}`);
 	}
 };

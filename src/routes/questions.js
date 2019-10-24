@@ -10,7 +10,8 @@ const {
 	store,
 	showByCategory,
 	searchByName,
-	userQuestions
+	userQuestions,
+	addAnswer
 } = QuestionsController;
 
 // Home
@@ -31,5 +32,8 @@ questions.post('/buscar', searchByName);
 
 // Show user questions
 questions.get('/minhas/perguntas', auth, userQuestions);
+
+// Add answer
+questions.post('/add/answer', auth, addAnswer);
 
 module.exports = questions;

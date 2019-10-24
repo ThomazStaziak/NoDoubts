@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, Sequelize) => {
-	const Answers = sequelize.define(
-		'answers',
+	const Answer = sequelize.define(
+		'Answer',
 		{
 			content: Sequelize.STRING,
 			questions_id: Sequelize.INTEGER,
@@ -11,9 +11,15 @@ module.exports = (sequelize, Sequelize) => {
 			tableName: 'answers'
 		}
 	);
-	Answers.associate = function(models) {
-		// associations can be defined here
-		// Answers.belongsTo(models.User), Answers.belongsTo(models.Questions);
+	Answer.associate = function(models) {
+		Answer.belongsTo(models.User, {
+			foreignKey: 'users_id',
+			as: 'user'
+		}),
+			Answer.belongsTo(models.Category, {
+				foreignKey: 'questions_id',
+				as: 'questions'
+			});
 	};
-	return Answers;
+	return Answer;
 };
